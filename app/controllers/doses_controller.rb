@@ -1,5 +1,6 @@
 class DosesController < ApplicationController
-  before_action :set_cocktail, :set_cocktail, only: [:new, :create, :destroy]
+  before_action :set_cocktail, :set_ingredient, only: [:new, :create, :destroy]
+  before_action :set_ingredient, only: [:create]
 
   def new
     @dose = @cocktail.doses.build
@@ -13,15 +14,8 @@ class DosesController < ApplicationController
     redirect_to cocktail_path(@cocktail)
   end
 
-  def create
-    @dose = Dose.new(dose_params)
-    @dose.cocktail = @cocktail
-    @dose.ingredient = @ingredient
-    @dose.save
-    redirect_to cocktail_path(@cocktail)
-  end
-
   def destroy
+    @dose = Dose.find(params[:id])
     @cocktail = @dose.cocktail
     @dose.destroy
     redirect_to cocktail_path(@cocktail)
@@ -34,7 +28,7 @@ class DosesController < ApplicationController
   end
 
   def set_ingredient
-    @ingredient = Ingredient.find(params[:ingredient_id])
+    @ingredient = Ingredient.find(params[:dose][:ingredient])
   end
 
   # STRONG PARAMS#
@@ -43,6 +37,7 @@ class DosesController < ApplicationController
   end
 
   def ingredient_params
+    raise
     params.require(:dose).permit(:name)
   end
 end

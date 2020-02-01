@@ -7,16 +7,15 @@
 
   <!-- Ingredient list -->
     <% if @cocktail.doses.empty? %>
-      <p>No ingredients yet...
+      <p>Empty recipe
       </p>
     <% else %>
       <ul>
         <% @cocktail.doses.each do |dose| %>
         <li>
-          <i class="fa fa-glass"></i> <strong> <%= dose.ingredient.name %> </strong>
-          <%= link_to "Delete", dose_path(dose), class: "btn btn-danger btn-xs", method: :delete  %>
+          <%= dose.description %> <strong> <%= dose.ingredient.name %> </strong>
+          <%= link_to "Delete", cocktail_dose_path(dose), method: :delete  %>
         </li>
-        <p><%= dose.description %></p>
         <% end %>
       </ul>
     <% end %>
