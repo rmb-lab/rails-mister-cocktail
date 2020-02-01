@@ -3,10 +3,10 @@ class CocktailsController < ApplicationController
 
   def index
     @cocktails = Cocktail.all
-    @doses = Dose.all
   end
 
   def show
+    @dose = Dose.new
   end
 
   # CREATE
@@ -18,8 +18,11 @@ class CocktailsController < ApplicationController
   ## POST the form
   def create
     @cocktail = Cocktail.new(cocktail_params)
-    @cocktail.save
-    redirect_to cocktail_path(@cocktail)
+    if @cocktail.save
+      redirect_to cocktail_path(@cocktail)
+    else
+      render :new
+    end
   end
 
   private

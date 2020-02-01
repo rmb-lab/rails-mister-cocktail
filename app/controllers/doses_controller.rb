@@ -1,5 +1,5 @@
 class DosesController < ApplicationController
-  before_action :set_cocktail, :set_ingredient, only: [:new, :create, :destroy]
+  before_action :set_cocktail, :set_ingredient, only: [:new, :create]
   before_action :set_ingredient, only: [:create]
 
   def new
@@ -10,8 +10,11 @@ class DosesController < ApplicationController
     @dose = Dose.new(dose_params)
     @dose.cocktail = @cocktail
     @dose.ingredient = @ingredient
-    @dose.save
-    redirect_to cocktail_path(@cocktail)
+    if @dose.save
+      redirect_to cocktail_path(@cocktail)
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -33,11 +36,10 @@ class DosesController < ApplicationController
 
   # STRONG PARAMS#
   def dose_params
-    params.require(:dose).permit(:description)
+    params.require(:dose).permit(:description, :cocktail_id, :ingredient_id)
   end
 
   def ingredient_params
-    raise
-    params.require(:dose).permit(:name)
+    params.require(:ingredient).permit(:name)
   end
 end
