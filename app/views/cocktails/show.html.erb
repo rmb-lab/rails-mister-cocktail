@@ -1,0 +1,40 @@
+<div class="container">
+
+<h2><%= @cocktail.name %></h2>
+
+<div class="card-mixture">
+  <h5>Mixture</h5>
+
+  <!-- Ingredient list -->
+    <% if @cocktail.doses.empty? %>
+      <p>No ingredients yet...
+      </p>
+    <% else %>
+      <ul>
+        <% @cocktail.doses.each do |dose| %>
+        <li>
+          <i class="fa fa-glass"></i> <strong> <%= dose.ingredient.name %> </strong>
+          <%= link_to "Delete", dose_path(dose), class: "btn btn-danger btn-xs", method: :delete  %>
+        </li>
+        <p><%= dose.description %></p>
+        <% end %>
+      </ul>
+    <% end %>
+
+  <br>
+
+  <!-- Add Ingredient -->
+  <%= link_to new_cocktail_dose_path(@cocktail)  do %>
+    <i class="far fa-plus-square"></i> Add an ingredient
+  <% end %>
+</div>
+
+<br>
+
+<div class="footer">
+  <%= link_to cocktails_path  do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+</div>
+
+</div>
