@@ -11,7 +11,7 @@ require 'open-uri'
 puts 'Cleaning database...'
 
 # INGREDIENTS
-Ingredient.destroy_all
+# Ingredient.destroy_all
 
 puts 'Creating ingredients...'
 # ingredients_attributes = [
@@ -30,9 +30,10 @@ puts 'Creating ingredients...'
 # ]
 # Ingredient.create!(ingredients_attributes)
 
-url = 'hhttps://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
 ingredients_serialized = open(url).read
-ingredients = JSON.parse(ingredients_serialized)
+result = JSON.parse(ingredients_serialized)
+ingredients = result['drinks']
 
 ingredients.each do |ingredient|
   ingredient.each do |key, value|
