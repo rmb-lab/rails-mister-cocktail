@@ -1,13 +1,19 @@
 <div class="container">
-  <h1>All <%= Cocktail.count %> Cocktails</h1>
+  <br>
 
-  <% @cocktails.each do |cocktail| %>
-    <div class="card-cocktail">
-        <h2><%= link_to cocktail.name, cocktail_path(cocktail) %></h2>
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+    <h1>All <%= Cocktail.count %> Cocktails</h1>
+  </div>
+
+  <br>
+
+  <div class="cards">
+    <% @cocktails.each do |cocktail| %>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
+      <%= link_to cocktail.name, cocktail_path(cocktail) %>
     </div>
-  <% end %>
 
-  <%= link_to new_cocktail_path  do %>
-    <i class="far fa-plus-square"></i> Add a New Cocktail
-  <% end %>
+
+    <% end %>
+  </div>
 </div>

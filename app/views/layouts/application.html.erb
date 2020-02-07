@@ -13,7 +13,12 @@
   </head>
 
   <body>
+
+    <%= render 'components/navbar' %>
+
     <%= yield %>
+
+    <%= render 'components/footer' %>
 
     <!-- Script -->
     <%= javascript_pack_tag "application" %>
